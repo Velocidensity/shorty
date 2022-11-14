@@ -51,6 +51,6 @@ poetry install --with=dev
 Default barebones frontend comes with a precompiled Tailwind file, but if you wish to change it, you can recompile it with the following commands:
 ```
 npm install -D tailwindcss
-npx tailwindcss -c tailwind.config.js -o shorty/static/tailwind.css
+npx tailwindcss -c tailwind.config.js -o shorty/static/tailwind.css --minify
 ```
 
