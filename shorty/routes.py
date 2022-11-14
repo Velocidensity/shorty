@@ -22,9 +22,8 @@ def privacy():
 @app.route('/<string:stem>', methods=['GET'])
 def redirect_stem(stem):
     if mapping := URL.get(stem):
-        r = redirect(mapping.url)
-        r.headers['X-Location'] = r.headers['Location']
-        return r
+        URL.hit(stem)
+        return redirect(mapping.url)
 
     return render_template('404.html')
 

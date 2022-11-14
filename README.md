@@ -40,6 +40,13 @@ To change it, set `SHORTY_CONFIG` env var to a path to your configuration file. 
 
 BIND_HOST/BIND_PORT only apply when running the app directly for debugging purposes.
 
+# Database migration/upgrade
+Upgrading database schema between versions is handled by Flask-Migrate.
+To upgrade, use:
+```
+flask --app shorty db upgrade
+```
+
 # Development
 Development environment is managed via poetry.
 
@@ -53,4 +60,9 @@ Default barebones frontend comes with a precompiled Tailwind file, but if you wi
 npm install -D tailwindcss
 npx tailwindcss -c tailwind.config.js -o shorty/static/tailwind.css --minify
 ```
+
+# TODO
+[ ] add user account support
+[ ] add user and administration panel
+[ ] add stats page
 

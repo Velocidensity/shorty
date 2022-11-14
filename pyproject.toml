@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "shorty"
-version = "0.1.0"
+version = "0.1.1"
 description = "A standard URL shortener with QR code support and a basic user interface"
 authors = ["Velocidensity"]
 license = "MIT"
@@ -31,6 +31,8 @@ shorty = "shorty.__main__:run"
 
 [tool.flake8]
 max-line-length = 120
+exclude = ["migrations/**/*"]
 
 [tool.isort]
 line_length = 120
+skip_glob = ["migrations/**/*"]

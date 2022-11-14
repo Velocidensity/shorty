@@ -11,6 +11,7 @@ class URL(db.Model):
     stem = db.Column(db.String(5), index=True, primary_key=True)
     url = db.Column(db.String(2048), index=True)
     user_ip = db.Column(db.String(48))
+    hits = db.Column(db.Integer, default=0)
     added_time = db.Column(db.DateTime(timezone=False), server_default=func.now())
 
     @classmethod
@@ -38,6 +39,13 @@ class URL(db.Model):
             db.session.commit()
 
         return mapping
+
+    @classmethod
+    def hit(cls, stem: str):
+        """Adds an extra hit to the counter for a given URL"""
+        mapping = cls.query.filter_by(stem=stem).first()
+        mapping.hits = (mapping.hits or 0) + 1
+        db.session.commit()
 
     def __repr__(self):
         return '<URL {}>'.format(self.stem)
