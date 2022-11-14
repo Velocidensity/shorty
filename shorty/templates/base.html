@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html class="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if title %}{{ title }} - Shorty{% else %}Shorty{% endif %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='tailwind.css') }}"></script>
+    {% block head %}{% endblock %}
+</head>
+<body class="dark:bg-slate-800 font-sans">
+    <div class="h-screen p-4 flex items-center justify-center" >
+        <div class="bg-stone-100 py-5 px-10 sm:max-w-lg w-full">
+            <div class="sm:text-3xl font-semibold text-center text-red-600"><a href="{{ url_for('front') }}">Shorty</a></div>
+            <div class="py-5">{% block content %}{% endblock %}</div>
+            <div class="flex-grow border-t border-gray-400 mb-2"></div>
+            <footer><a href="{{ url_for('privacy') }}">Privacy policy</a></footer>
+        </div>
+    </div>
+</body>
+</html>

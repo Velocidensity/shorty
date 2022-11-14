@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "shorty"
+version = "0.1.0"
+description = "Simple link shortener with QR Code generation"
+authors = ["Velocidensity"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^2.2.2"
+flask-migrate = "^3.1.0"
+flask-sqlalchemy = "^3.0.2"
+segno = "^1.5.2"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.10.1"
+pre-commit = "^2.20.0"
+flake8 = "^5.0.4"
+flake8-pyproject = "^1.1.0.post0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+shorty = "shorty.__main__:run"
+
+[tool.flake8]
+max-line-length = 120
+
+[tool.isort]
+line_length = 120

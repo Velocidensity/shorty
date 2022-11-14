@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% set title = None %}
+{% block head %}
+<script src="{{ url_for('static', filename='main.js') }}" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+<input class="w-full py-5 px-5" id="url" type="text" placeholder="Paste your URL here"/>
+<div class="flex justify-center pt-6">
+    <button class="rounded-full p-3 mb-4 w-full sm:w-52 bg-green-600 text-white" onclick="shorten()">
+        Shorten
+    </button>
+</div>
+<div class="sm:text-xl text-center" id="output"></div>
+<div class="sm:text-xl text-center" id="process"></div>
+{% endblock %}
