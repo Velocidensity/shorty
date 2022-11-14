@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "shorty"
 version = "0.1.0"
-description = "Simple link shortener with QR Code generation"
+description = "A standard URL shortener with QR code support and a basic user interface"
 authors = ["Velocidensity"]
 license = "MIT"
 readme = "README.md"
