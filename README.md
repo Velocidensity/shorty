@@ -62,7 +62,7 @@ npx tailwindcss -c tailwind.config.js -o shorty/static/tailwind.css --minify
 ```
 
 # TODO
-[ ] add user account support
-[ ] add user and administration panel
-[ ] add stats page
+- [ ] add user account support
+- [ ] add user and administration panel
+- [ ] add stats page
 
