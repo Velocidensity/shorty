@@ -1,70 +1,70 @@
-function get_a(text, href) {
-    let a = document.createElement('a');
-    a.innerText = text;
-    a.href = href;
+function getLink (text, href) {
+  const a = document.createElement('a');
+  a.innerText = text;
+  a.href = href;
 
-    return a;
+  return a;
 }
 
-function get_button(text, href) {
-    let button = document.createElement('button');
-    button.classList.add("rounded-full", "p-1", "ml-2", "w-50", "bg-sky-600", "text-xs", "text-white");
-    if (href !== null) {
-        button.appendChild(get_a(text, href));
-    } else {
-        button.innerText = text;
+function getButton (text, href) {
+  const button = document.createElement('button');
+  button.classList.add('rounded-full', 'p-1', 'ml-2', 'w-50', 'bg-sky-600', 'text-xs', 'text-white');
+  if (href !== null) {
+    button.appendChild(getLink(text, href));
+  } else {
+    button.innerText = text;
+  }
+
+  return button;
+}
+
+function embed (url, stem) {
+  const copyButton = getButton('Copy', null);
+  copyButton.onclick = function () {
+    navigator.clipboard.writeText(url);
+    copyButton.innerText = 'Copied!';
+    setTimeout(function () { copyButton.innerText = 'Copy'; }, 650);
+  };
+
+  const p = document.createElement('p');
+  p.appendChild(getLink(url, url));
+  p.appendChild(copyButton);
+  p.appendChild(getButton('svg', `qr/${stem}.svg`));
+  p.appendChild(getButton('png', `qr/${stem}.png`));
+
+  return p;
+}
+
+function validate (url) {
+  try {
+    const obj = new URL(url);
+    return obj.protocol === 'http:' || obj.protocol === 'https:';
+  } catch (_) {}
+
+  return false;
+}
+
+async function shorten () {
+  const url = document.getElementById('url').value;
+  if (!validate(url)) {
+    document.getElementById('process').innerHTML = 'Invalid URL!';
+    return;
+  }
+
+  document.getElementById('process').innerHTML = 'Shortening...';
+  fetch('shorten', {
+    method: 'POST',
+    body: JSON.stringify({
+      url
+    }),
+    headers: {
+      Accept: 'application/json'
     }
-
-    return button;
-}
-
-function embed(url, stem) {
-    let copy_button = get_button("Copy", null);
-    copy_button.onclick = function() {
-        navigator.clipboard.writeText(url);
-        button.innerText = "Copied!";
-        setTimeout(function() { button.innerText = "Copy"; }, 650);
-    };
-
-    let p = document.createElement('p');
-    p.appendChild(get_a(url, url));
-    p.appendChild(copy_button);
-    p.appendChild(get_button('svg', `qr/${stem}.svg`));
-    p.appendChild(get_button('png', `qr/${stem}.png`));
-
-    return p;
-}
-
-function validate(url) {
-    try {
-        let obj = new URL(url);
-        return obj.protocol == "http:" || obj.protocol == "https:";
-    } catch (_) {}
-
-    return false;
-}
-
-async function shorten() {
-    let url = document.getElementById('url').value;
-    if (!validate(url)) {
-        document.getElementById('process').innerHTML = "Invalid URL!";
-        return;
-    }
-
-    document.getElementById('process').innerHTML = "Shortening...";
-    fetch('shorten', {
-        method: 'POST',
-        body: JSON.stringify({
-            'url': url
-        }),
-        headers: {
-            'Accept': 'application/json',
-        },
-    })
+  })
     .then(response => response.json())
     .then(response => {
-        let p = embed(response.url, response.stem);
-        document.getElementById('process').innerHTML = "";
-        document.getElementById('output').appendChild(p);
+      const p = embed(response.url, response.stem);
+      document.getElementById('process').innerHTML = '';
+      document.getElementById('output').appendChild(p);
     });
 }
