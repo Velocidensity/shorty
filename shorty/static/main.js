@@ -29,8 +29,8 @@ function embed (url, stem) {
   const p = document.createElement('p');
   p.appendChild(getLink(url, url));
   p.appendChild(copyButton);
-  p.appendChild(getButton('svg', `qr/${stem}.svg`));
-  p.appendChild(getButton('png', `qr/${stem}.png`));
+  p.appendChild(getButton('PNG', `qr/${stem}.png`));
+  p.appendChild(getButton('SVG', `qr/${stem}.svg`));
   p.appendChild(getButton('Stats', `${stem}+`));
 
   return p;
