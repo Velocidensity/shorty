@@ -27,9 +27,9 @@ class URL(db.Model):
         return mapping
 
     @classmethod
-    def add(cls, url: str, user_ip: str):
+    def add(cls, url: str, user_ip: str, force: bool = False):
         """Adds a stem->URL mapping"""
-        if not (mapping := cls.find(url)):
+        if force or not (mapping := cls.find(url)):
             mapping = URL(
                 stem=generate_stem(),
                 url=url,

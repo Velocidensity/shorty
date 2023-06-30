@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% set title = None %}
+{% block head %}
+{% endblock %}
+{% block content %}
+{% set button_class = "rounded-full p-1 w-50 bg-sky-600 text-xs text-white" %}
+<h2 class="sm:text-2xl font-semibold text-center m-0">Stats for {{ mapping.stem }}:</h4>
+<div class="flex justify-center pt-6">
+    <ul class="list-disc">
+        <li>URL: <a href="{{ mapping.url }}">{{ mapping.url }}</a></li>
+        <li>Added on: {{ mapping.added_time }}</li>
+        <li>Hits: {{ mapping.hits }}</li>
+        <li>QR code: <button class="{{ button_class }}"><a href="{{ url_for('qrcode_png', stem=mapping.stem) }}">PNG</a></button>,
+                     <button class="{{ button_class }}"><a href="{{ url_for('qrcode_svg', stem=mapping.stem) }}">SVG</a></button>
+        </li>
+    </ul>
+</div>
+{% endblock %}

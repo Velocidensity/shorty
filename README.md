@@ -1,6 +1,19 @@
 # Shorty
 A standard URL shortener with QR code support and a basic user interface
 
+# Features
+- Keeps track of and redirects short URL stems
+- Generates shortened QR codes in SVG and PNG formats
+- Detect and prevent duplicate URLs, with an option to force a new one
+- Hit tracking and statistics page
+- JSON RESTful API for URL information and creation
+
+# Screenshots
+|                                       |
+|:-------------------------------------:|
+| [![](https://github.com/Velocidensity/shorty/blob/main/screenshots/front_thumb.png "Front page")](https://github.com/Velocidensity/shorty/blob/main/screenshots/front.png)
+| [![](https://github.com/Velocidensity/shorty/blob/main/screenshots/statistics_thumb.png "Statistics page")](https://github.com/Velocidensity/shorty/blob/main/screenshots/statistics.png)
+
 # Installation
 ```
 pip install git+https://github.com/Velocidensity/shorty
@@ -30,7 +43,7 @@ location /shorty/ {
 ```
 
 # Configuration
-Default: 
+Default:
 ```ini
 BIND_HOST="127.0.0.1"
 BIND_PORT=8080
@@ -55,14 +68,17 @@ poetry install --with=dev
 ```
 
 ## Compiling Tailwind CSS
-Default barebones frontend comes with a precompiled Tailwind file, but if you wish to change it, you can recompile it with the following commands:
+Default frontend comes with a precompiled Tailwind file, but if you wish to change it, you can recompile it with the following commands:
 ```
 npm install -D tailwindcss
 npx tailwindcss -c tailwind.config.js -o shorty/static/tailwind.css --minify
 ```
 
+## Formatting JavaScript code
+JavaScript code is formatted using [semistandard](https://github.com/standard/semistandard).
+
 # TODO
 - [ ] add user account support
 - [ ] add user and administration panel
-- [ ] add stats page
-
+- [x] add stats page
+- [x] add stats API

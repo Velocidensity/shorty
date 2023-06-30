@@ -31,6 +31,7 @@ function embed (url, stem) {
   p.appendChild(copyButton);
   p.appendChild(getButton('svg', `qr/${stem}.svg`));
   p.appendChild(getButton('png', `qr/${stem}.png`));
+  p.appendChild(getButton('Stats', `${stem}+`));
 
   return p;
 }
@@ -46,16 +47,17 @@ function validate (url) {
 
 async function shorten () {
   const url = document.getElementById('url').value;
+  const force = document.getElementById('force').checked;
   if (!validate(url)) {
     document.getElementById('process').innerHTML = 'Invalid URL!';
     return;
   }
 
   document.getElementById('process').innerHTML = 'Shortening...';
-  fetch('shorten', {
+  fetch('api/shorten', {
     method: 'POST',
     body: JSON.stringify({
-      url
+      url, force
     }),
     headers: {
       Accept: 'application/json'
