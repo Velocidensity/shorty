@@ -11,16 +11,19 @@ from shorty.helpers import validate_url
 
 @app.route('/', methods=['GET'])
 def front():
+    """Front page"""
     return render_template('front.html')
 
 
 @app.route('/privacy', methods=['GET'])
 def privacy():
+    """Privacy policy page"""
     return render_template('privacy.html')
 
 
 @app.route('/<string:stem>', methods=['GET'])
-def redirect_stem(stem):
+def redirect_stem(stem: str):
+    """Redirect from stem"""
     if mapping := URL.get(stem):
         URL.hit(stem)
         return redirect(mapping.url)
@@ -29,12 +32,14 @@ def redirect_stem(stem):
 
 
 @app.route('/stats/<string:stem>', methods=['GET'])
-def redirect_stats(stem):
+def redirect_stats(stem: str):
+    """Alias for stem stats"""
     return redirect(url_for('stats', stem=stem))
 
 
 @app.route('/<string:stem>+', methods=['GET'])
-def stats(stem):
+def stats(stem: str):
+    """Stats page for a given stem"""
     if mapping := URL.get(stem):
         return render_template('stats.html', mapping=mapping)
 
@@ -42,7 +47,8 @@ def stats(stem):
 
 
 @app.route('/qr/<string:stem>.svg', methods=['GET'])
-def qrcode_svg(stem):
+def qrcode_svg(stem: str):
+    """QR code for a given stem as SVG"""
     if mapping := URL.get(stem):
         svg = BytesIO()
         segno.make(mapping.stem).save(svg, scale=15, kind='svg', xmldecl=False)
@@ -55,7 +61,8 @@ def qrcode_svg(stem):
 
 
 @app.route('/qr/<string:stem>.png', methods=['GET'])
-def qrcode_png(stem):
+def qrcode_png(stem: str):
+    """QR code for a given stem as PNG"""
     if mapping := URL.get(stem):
         png = BytesIO()
         segno.make(mapping.stem).save(png, scale=15, kind='png')
@@ -68,7 +75,8 @@ def qrcode_png(stem):
 
 
 @app.route('/api/info/<string:stem>', methods=['GET'])
-def api(stem):
+def api(stem: str):
+    """JSON API with info for a given stem"""
     if mapping := URL.get(stem):
         return jsonify(
             stem=mapping.stem,
@@ -87,6 +95,7 @@ def api(stem):
 
 @app.route('/api/shorten', methods=['POST'])
 def shorten():
+    """JSON API endpoint creating a shortened URL"""
     try:
         request.get_json(force=True, cache=True)
     except werkzeug.exceptions.BadRequest:
@@ -106,7 +115,7 @@ def shorten():
 
     return jsonify(
         stem=mapping.stem,
-        url=url_for(
+        shortened_url=url_for(
             'redirect_stem',
             stem=mapping.stem,
             _external=True

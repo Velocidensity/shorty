@@ -22,6 +22,12 @@ pre-commit = "^2.20.0"
 flake8 = "^5.0.4"
 flake8-pyproject = "^1.1.0.post0"
 
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.2.3"
+furo = "^2023.8.19"
+sphinxcontrib-httpdomain = "^1.8.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

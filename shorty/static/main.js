@@ -65,7 +65,7 @@ async function shorten () {
   })
     .then(response => response.json())
     .then(response => {
-      const p = embed(response.url, response.stem);
+      const p = embed(response.shortened_url, response.stem);
       document.getElementById('process').innerHTML = '';
       document.getElementById('output').appendChild(p);
     });

@@ -16,19 +16,45 @@ class URL(db.Model):
 
     @classmethod
     def get(cls, stem: str) -> URL | None:
-        """Returns saved URL for a given stem"""
+        """
+        Returns saved URL for a given stem
+
+        Args:
+            stem: Shortened URL stem
+
+        Returns:
+            URL if found
+        """
         mapping = cls.query.filter_by(stem=stem).first()
         return mapping
 
     @classmethod
     def find(cls, url: str) -> URL | None:
-        """Finds a stem for a given URL, if one exists"""
+        """
+        Finds a stem for a given URL, if one exists
+
+        Args:
+            url: Full URL
+
+        Returns:
+            URL if found, None otherwise
+        """
         mapping = cls.query.filter_by(url=url).first()
         return mapping
 
     @classmethod
-    def add(cls, url: str, user_ip: str, force: bool = False):
-        """Adds a stem->URL mapping"""
+    def add(cls, url: str, user_ip: str, force: bool = False) -> URL:
+        """
+        Adds a stem -> URL mapping
+
+        Args:
+            url: Full URL
+            user_ip: Creating user's IP address
+            force: Add a new mapping even if one exists for the given URL
+
+        Returns:
+            Added or existing mapping for a given URL
+        """
         if force or not (mapping := cls.find(url)):
             mapping = URL(
                 stem=generate_stem(),
@@ -41,11 +67,21 @@ class URL(db.Model):
         return mapping
 
     @classmethod
-    def hit(cls, stem: str):
-        """Adds an extra hit to the counter for a given URL"""
+    def hit(cls, stem: str) -> bool:
+        """Adds an extra hit to the counter for a given URL
+
+        Args:
+            stem: Shortened URL stem
+
+        Returns:
+            Operation success status
+        """
         mapping = cls.query.filter_by(stem=stem).first()
-        mapping.hits = (mapping.hits or 0) + 1
-        db.session.commit()
+        if mapping:
+            mapping.hits = (mapping.hits or 0) + 1
+            db.session.commit()
+            return True
+        return False
 
     def __repr__(self):
         return '<URL {}>'.format(self.stem)
