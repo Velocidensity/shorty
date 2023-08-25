@@ -25,3 +25,25 @@ Formatting JavaScript code
 ------------------------------
 
 JavaScript code is formatted using `semistandard <https://github.com/standard/semistandard>`_.
+
+------------------------------
+Pre-commit hooks
+------------------------------
+
+To install pre-commit hooks, run:
+
+.. code-block:: console
+
+   $ pre-commit install
+
+------------------------------
+Building documentation
+------------------------------
+
+To build docs, install sphinx and furo theme with poetry, and then use make.
+
+.. code-block:: console
+
+   $ poetry install --with=docs
+   $ cd docs
+   $ make html
