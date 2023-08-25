@@ -8,16 +8,16 @@ A standard URL shortener with QR code support and a basic user interface
 - Hit tracking and statistics page
 - JSON RESTful API for URL information and creation
 
+# Documentation
+https://velocidensity.github.io/shorty/
+
+Refer to the documentation for installation, configuration, usage and development instructions.
+
 # Screenshots
 |                                       |
 |:-------------------------------------:|
 | [![](https://github.com/Velocidensity/shorty/blob/main/screenshots/front_thumb.png "Front page")](https://github.com/Velocidensity/shorty/blob/main/screenshots/front.png)
 | [![](https://github.com/Velocidensity/shorty/blob/main/screenshots/statistics_thumb.png "Statistics page")](https://github.com/Velocidensity/shorty/blob/main/screenshots/statistics.png)
-
-# Documentation
-https://velocidensity.github.io/shorty/
-
-Refer to the documentation for installation, configuration, usage and development instructions.
 
 # TODO
 - [ ] add user account support
